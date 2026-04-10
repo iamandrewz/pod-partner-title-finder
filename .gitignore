@@ -31,4 +31,7 @@ Thumbs.db
 # Build artifacts
 backend/static/
 backend/templates/
+backend/__pycache__/
+backend/optimizer/__pycache__/
+backend/data/
 frontend/.next/
