@@ -11,6 +11,8 @@ const PUBLIC_ROUTES = [
   '/api/auth/logout',
   '/api/users',
   '/api/health',
+  '/api/v3',
+  '/api/title-finder',
 ];
 
 function validateSessionToken(token: string): boolean {
