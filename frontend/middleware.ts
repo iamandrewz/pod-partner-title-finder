@@ -9,6 +9,7 @@ const PUBLIC_ROUTES = [
   '/login',
   '/api/auth/login',
   '/api/auth/logout',
+  '/api/auth/youtube',
   '/api/users',
   '/api/health',
   '/api/v3',

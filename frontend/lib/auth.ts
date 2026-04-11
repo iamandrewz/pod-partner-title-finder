@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server';
 
+// Auth configuration
 const AUTH_COOKIE_NAME = 'podpartner_session';
 const SESSION_SECRET = process.env.SESSION_SECRET || 'pursue-podcasting-secret-2024';
 
@@ -8,15 +9,15 @@ export function createSessionToken(email: string): string {
   return Buffer.from(payload).toString('base64');
 }
 
-export function validateSessionToken(token: string): boolean {
+export function validateSessionToken(token: string): { valid: boolean; email?: string } {
   try {
     const decoded = Buffer.from(token, 'base64').toString('utf-8');
-    const [, secret, timestamp] = decoded.split(':');
-    if (secret !== SESSION_SECRET) return false;
-    if (Date.now() - parseInt(timestamp) > 7 * 24 * 60 * 60 * 1000) return false;
-    return true;
+    const [email, secret, timestamp] = decoded.split(':');
+    if (secret !== SESSION_SECRET) return { valid: false };
+    if (Date.now() - parseInt(timestamp) > 7 * 24 * 60 * 60 * 1000) return { valid: false };
+    return { valid: true, email };
   } catch {
-    return false;
+    return { valid: false };
   }
 }
 
